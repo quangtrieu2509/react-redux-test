@@ -1,22 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAPIPosts, getPosts } from './redux/postSlice';
+import { useEffect } from 'react';
+import PostForm from './components/PostForm';
 
 function App() {
+  const posts = useSelector(getPosts);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    
+    dispatch(getAPIPosts())
+  }, [dispatch])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className='post-wrapper'>
+          <PostForm/>
+          {
+            posts.map(e => (
+              <div key={e.id} className='post'>
+                <div className='user'>
+                  @{e.userId}
+                </div>
+                <div className='title'>
+                  {e.title}
+                </div>
+                <div className='body'>
+                  {e.body}
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </header>
     </div>
   );
