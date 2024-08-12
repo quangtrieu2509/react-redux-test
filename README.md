@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The app looks like this:
 
-![app](public\readme.png)
+![app](./public/readme.png)
 
 ### `npm test`
 
